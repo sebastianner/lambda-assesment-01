@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+:root {
+  --color-beige: #e7e6d9;
+}
+
+@theme inline {
+  --color-beige: #e7e6d9;
+  --color-ultraviolet-500: #6236f4;
+  --box-shadow:
+    0 0.5px 0 0 #ff0, 0.5px 0 0 0 #0ff, 1px 0.5px 0 0 #0f0, 0 -0.5px 0 0 #00f,
+    -0.5px 0 0 0 #f0f, -1px 0 0 0 #f00;
+  --text-shadow:
+    0 0.99px 0 #ff0, 0.99px 0 0 #0ff, 1.98px 0.99px 0 #0f0, 0 -0.99px 0 #00f,
+    -0.99px 0 0 #f0f, -1.98px 0 0 #f00;
+  --color-ultraviolet: #6236f4;
+  --color-background-gray: #262625;
+  --color-text-secondary: #b0afa6;
+}
+
+html,
+body {
+  background-color: black;
+  color: #e7e6d9;
+  font-family: "Inter", sans-serif;
+}
+
+@layer components {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 17px 36px;
+    border-radius: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: opacity 0.15s ease;
+    background-color: var(--color-beige);
+    color: #0b0b0b;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--box-shadow);
+  }
+
+  .button:hover {
+    opacity: 0.88;
+    box-shadow: none;
+  }
+
+  .button:active {
+    outline: none;
+  }
+
+  .button--secondary {
+    background-color: var(--color-ultraviolet-500);
+    color: var(--color-beige);
+    box-shadow: none;
+  }
+
+  .button--secondary:hover {
+    opacity: 1;
+    background-color: #815ef6;
+  }
+
+  .card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: black;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+
+    @media (min-width: 1440px) {
+      height: 120px;
+      transition: height 0.4s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    &__description {
+      @media (min-width: 1440px) {
+        opacity: 0;
+        transform: translateY(6px);
+        transition:
+          opacity 0.1s ease,
+          transform 0.35s ease;
+      }
+    }
+
+    &--open {
+      @media (min-width: 1440px) {
+        height: 240px;
+      }
+
+      .card-info__description {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0, 0, 0.2, 1);
+
+    > div {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    &--open {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  .section-two {
+    margin: 0 auto;
+    .section-two-title {
+      width: calc(100% - 1.25rem);
+    }
+  }
+
+  .section-three {
+    margin: 0 auto;
+
+    &-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 4rem;
+      justify-content: center;
+
+      @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      @media (min-width: 1536px) {
+        grid-template-columns: repeat(4, max-content);
+        justify-content: center;
+      }
+    }
+  }
+}
